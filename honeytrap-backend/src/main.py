@@ -15,6 +15,8 @@ from src.routes.content import content_bp
 from src.routes.profile_management import profile_management_bp
 from src.routes.content_automation import content_automation_bp
 from src.routes.discovery_analytics import discovery_analytics_bp
+from src.routes.social_accounts import social_accounts_bp
+from src.routes.session_management import session_management_bp
 import json
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
@@ -32,6 +34,8 @@ app.register_blueprint(content_bp, url_prefix='/api')
 app.register_blueprint(profile_management_bp, url_prefix='/api')
 app.register_blueprint(content_automation_bp, url_prefix='/api')
 app.register_blueprint(discovery_analytics_bp, url_prefix='/api')
+app.register_blueprint(social_accounts_bp, url_prefix='/api')
+app.register_blueprint(session_management_bp, url_prefix='/api')
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"

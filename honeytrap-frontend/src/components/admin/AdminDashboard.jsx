@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ProfileManagement from './ProfileManagement'
 import ContentManagement from './ContentManagement'
 import AnalyticsDashboard from './AnalyticsDashboard'
+import SocialAccountManager from './SocialAccountManager'
 import { 
   Shield, 
   Users, 
@@ -171,6 +172,7 @@ const AdminDashboard = () => {
             <TabsTrigger value="profiles">Profile Management</TabsTrigger>
             <TabsTrigger value="content">Content Management</TabsTrigger>
             <TabsTrigger value="analytics">Analytics Dashboard</TabsTrigger>
+            <TabsTrigger value="social-accounts">Social Accounts</TabsTrigger>
           </TabsList>
 
           <TabsContent value="recent" className="space-y-4">
@@ -287,6 +289,10 @@ const AdminDashboard = () => {
 
           <TabsContent value="analytics" className="space-y-4">
             <AnalyticsDashboard />
+          </TabsContent>
+
+          <TabsContent value="social-accounts" className="space-y-4">
+            <SocialAccountManager />
           </TabsContent>
         </Tabs>
       </div>

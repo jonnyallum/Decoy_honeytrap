@@ -12,6 +12,7 @@ This system is designed exclusively for the purpose of detecting and preventing 
 
 - [Overview](#overview)
 - [Features](#features)
+- [Social Media Integration](#social-media-integration)
 - [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -51,12 +52,138 @@ The AI Honeytrap Network is a cutting-edge law enforcement tool that creates rea
 - Statistical overview of system activity
 - High-risk session alerts and management
 - Evidence report generation for legal proceedings
+- **Social Media Account Management**: Comprehensive account login and session management
+- **Profile Management**: Automated profile creation and content management
+- **Analytics Dashboard**: Advanced discovery analytics and tracking
+
+### 📱 Social Media Integration
+- **Multi-Platform Support**: Facebook, Instagram, Twitter, Discord, TikTok, Snapchat, LinkedIn, YouTube
+- **OAuth Authentication**: Secure OAuth 2.0 integration for supported platforms
+- **Credential Management**: Secure storage and management of account credentials
+- **Session Management**: Multiple active sessions with seamless account switching
+- **Browser Automation**: Automated login for complex authentication flows
+- **Rate Limiting**: Built-in rate limiting per platform and action type
+- **Activity Monitoring**: Comprehensive logging of all account activities
 
 ### 🔒 Security & Compliance
 - End-to-end encryption for all data
 - Comprehensive audit logging
 - Secure evidence storage with integrity verification
 - GDPR and law enforcement compliance features
+
+## 📱 Social Media Integration
+
+The AI Honeytrap Network now includes comprehensive social media account management functionality, allowing operators to log into and manage multiple social media accounts directly from the application.
+
+### Supported Platforms
+
+| Platform | OAuth | Credentials | Browser Automation | API Integration |
+|----------|-------|-------------|-------------------|-----------------|
+| Facebook | ✅ | ✅ | ✅ | ✅ |
+| Instagram | ✅ | ✅ | ✅ | ✅ |
+| Twitter/X | ✅ | ✅ | ✅ | ✅ |
+| Discord | ✅ | ✅ | ✅ | ✅ |
+| TikTok | ❌ | ✅ | ✅ | ✅ |
+| Snapchat | ❌ | ✅ | ✅ | ❌ |
+| LinkedIn | ✅ | ✅ | ✅ | ✅ |
+| YouTube | ✅ | ✅ | ✅ | ✅ |
+
+### Key Features
+
+#### 🔐 **Authentication Methods**
+- **OAuth 2.0**: Secure OAuth integration for platforms that support it
+- **Credential-Based**: Username/password authentication with encrypted storage
+- **Browser Automation**: Selenium-based automation for complex login flows
+- **Token Management**: Automatic token refresh and session restoration
+
+#### 🔄 **Session Management**
+- **Multiple Active Sessions**: Manage multiple accounts simultaneously across platforms
+- **Seamless Switching**: Instantly switch between different social media accounts
+- **Session Persistence**: Sessions survive application restarts and maintain state
+- **Automatic Cleanup**: Expired sessions are automatically cleaned up
+- **Activity Monitoring**: Comprehensive logging of all account activities
+
+#### 🛡️ **Security & Compliance**
+- **Encrypted Storage**: All credentials and tokens encrypted with AES-256
+- **Secure Transmission**: TLS encryption for all communications
+- **Access Controls**: Role-based permissions for account management
+- **Audit Logging**: Complete audit trail of all account operations
+- **Rate Limiting**: Platform-specific rate limiting to prevent abuse
+
+#### 📊 **Management Interface**
+- **Account Dashboard**: Visual overview of all connected accounts
+- **Status Monitoring**: Real-time account status and session health
+- **Bulk Operations**: Manage multiple accounts efficiently
+- **Statistics & Analytics**: Detailed usage statistics and performance metrics
+
+### Usage Examples
+
+#### Adding a New Account
+```javascript
+// OAuth Authentication
+const authUrl = await fetch('/api/auth/oauth/facebook');
+window.open(authUrl, 'oauth_login');
+
+// Credential Authentication
+await fetch('/api/auth/credentials', {
+  method: 'POST',
+  body: JSON.stringify({
+    platform: 'instagram',
+    username: 'account@example.com',
+    password: 'secure_password'
+  })
+});
+```
+
+#### Managing Sessions
+```javascript
+// Create session
+const session = await fetch('/api/sessions', {
+  method: 'POST',
+  body: JSON.stringify({
+    account_id: 'account_123',
+    session_type: 'api'
+  })
+});
+
+// Switch session
+await fetch(`/api/sessions/${sessionId}/switch`, {
+  method: 'POST'
+});
+
+// Perform action
+await fetch(`/api/sessions/${sessionId}/action`, {
+  method: 'POST',
+  body: JSON.stringify({
+    action: 'post',
+    parameters: {
+      content: 'Hello, world!',
+      visibility: 'public'
+    }
+  })
+});
+```
+
+### Configuration
+
+Social media integration can be configured through environment variables:
+
+```bash
+# OAuth Configuration
+FACEBOOK_CLIENT_ID=your_facebook_client_id
+FACEBOOK_CLIENT_SECRET=your_facebook_client_secret
+TWITTER_CLIENT_ID=your_twitter_client_id
+TWITTER_CLIENT_SECRET=your_twitter_client_secret
+
+# Security
+ENCRYPTION_KEY=your_32_byte_encryption_key
+
+# Session Management
+SESSION_TIMEOUT=3600  # 1 hour
+MAX_SESSIONS_PER_USER=10
+```
+
+For detailed documentation, see [Social Media Integration Guide](docs/SOCIAL_MEDIA_INTEGRATION.md).
 
 ## 🏗️ Architecture
 
