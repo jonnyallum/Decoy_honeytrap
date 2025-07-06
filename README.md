@@ -1,12 +1,12 @@
 # AI Honeytrap Network
 
-**Hampshire Police - Online Safety Solution**
+**Online Safety Solution**
 
 A sophisticated AI-powered honeytrap system designed to detect and capture evidence of online predatory behavior through realistic decoy chat interfaces, intelligent AI responses, and comprehensive evidence collection.
 
 ## 🚨 Important Notice
 
-This system is designed exclusively for law enforcement use by Hampshire Police for the purpose of detecting and preventing online predatory behavior. Unauthorized use is strictly prohibited.
+This system is designed exclusively for the purpose of detecting and preventing online predatory behavior. Unauthorized use is strictly prohibited.
 
 ## 📋 Table of Contents
 
@@ -268,9 +268,9 @@ This system has been designed with legal compliance in mind:
 
 ### Technical Support
 For technical issues or questions:
-- Email: tech-support@hampshire.police.uk
-- Phone: +44 (0) 845 045 45 45
-- Emergency: Contact your designated technical liaison
+- Email: tech-support@kliqtmedia.co.uk
+- Phone: +44 (0) 7723959178
+
 
 ### Training and Documentation
 - Comprehensive user training materials available
@@ -286,7 +286,7 @@ For technical issues or questions:
 
 ---
 
-**© 2024 Hampshire Police. All rights reserved.**
+**© 2025 KLIQT Media. All rights reserved.**
 
-*This system is for authorized law enforcement use only. Unauthorized access or use is strictly prohibited and may result in criminal prosecution.*
+*This system is for authorized use only. Unauthorized access or use is strictly prohibited and may result in criminal prosecution.*
 
