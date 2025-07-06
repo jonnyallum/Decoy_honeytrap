@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, send_file
 from src.models.chat import db, ChatSession, ChatMessage, Persona, Evidence, AuditLog
+from src.security import security_manager, require_auth, rate_limit
 from datetime import datetime, timedelta
 import json
 import os
@@ -11,10 +12,74 @@ import tempfile
 
 admin_bp = Blueprint('admin', __name__)
 
+@admin_bp.route('/admin/login', methods=['POST'])
+@rate_limit(max_requests=5, window_minutes=15)  # Strict rate limiting for login
+def admin_login():
+    """Secure admin login with proper authentication"""
+    try:
+        data = request.get_json()
+        username = security_manager.sanitize_input(data.get('username', ''))
+        password = data.get('password', '')
+        
+        # Log login attempt
+        security_manager.log_security_event(
+            'login_attempt', 
+            f'Username: {username}', 
+            request.remote_addr
+        )
+        
+        # Demo credentials (in production, use database with hashed passwords)
+        if username == 'admin' and password == 'hampshire2024':
+            # Generate secure session token
+            token = security_manager.generate_session_token(
+                user_id='admin_user',
+                role='admin'
+            )
+            
+            security_manager.log_security_event(
+                'login_success', 
+                f'Admin user logged in', 
+                request.remote_addr
+            )
+            
+            return jsonify({
+                'success': True,
+                'token': token,
+                'message': 'Login successful'
+            })
+        else:
+            security_manager.log_security_event(
+                'login_failed', 
+                f'Invalid credentials for username: {username}', 
+                request.remote_addr
+            )
+            
+            return jsonify({
+                'success': False,
+                'message': 'Invalid credentials'
+            }), 401
+            
+    except Exception as e:
+        security_manager.log_security_event(
+            'login_error', 
+            f'Login error: {str(e)}', 
+            request.remote_addr
+        )
+        return jsonify({'error': 'Login failed'}), 500
+
 @admin_bp.route('/admin/dashboard', methods=['GET'])
+@require_auth
+@rate_limit(max_requests=60, window_minutes=60)
 def get_dashboard_stats():
     """Get dashboard statistics for admin interface"""
     try:
+        # Log dashboard access
+        security_manager.log_security_event(
+            'dashboard_access', 
+            f'User {request.current_user["user_id"]} accessed dashboard', 
+            request.remote_addr
+        )
+        
         # Get date range for filtering (default: last 30 days)
         days = request.args.get('days', 30, type=int)
         start_date = datetime.utcnow() - timedelta(days=days)

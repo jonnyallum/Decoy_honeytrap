@@ -281,3 +281,113 @@ class AIPersonaEngine:
         
         return detected_topics
 
+
+    def get_random_persona(self, platform_type: str = 'discord') -> Dict[str, Any]:
+        """
+        Get a random persona for the specified platform
+        """
+        from src.models.chat import Persona
+        import json
+        
+        # Query personas from database
+        personas = Persona.query.filter_by(platform_type=platform_type).all()
+        
+        if not personas:
+            # Return default persona if none found
+            return {
+                'id': 1,
+                'name': 'Emma',
+                'age': 13,
+                'platform_type': platform_type,
+                'personality_traits': {
+                    'interests': ['gaming', 'anime', 'art'],
+                    'personality': 'shy but friendly, loves to chat about hobbies'
+                },
+                'language_style': {
+                    'common_phrases': ['omg', 'lol', 'that\'s so cool'],
+                    'emoji_usage': 'frequent',
+                    'slang': ['sus', 'bet', 'no cap', 'fr']
+                }
+            }
+        
+        # Select random persona
+        import random
+        selected_persona = random.choice(personas)
+        
+        return {
+            'id': selected_persona.id,
+            'name': selected_persona.name,
+            'age': selected_persona.age,
+            'platform_type': selected_persona.platform_type,
+            'personality_traits': json.loads(selected_persona.personality_traits),
+            'language_style': json.loads(selected_persona.language_style),
+            'response_patterns': json.loads(selected_persona.response_patterns)
+        }
+    
+    def get_greeting(self, persona: Dict[str, Any]) -> str:
+        """
+        Generate a greeting message for the persona
+        """
+        response_patterns = persona.get('response_patterns', {})
+        greetings = response_patterns.get('greeting', ['hey!', 'hi there!', 'what\'s up?'])
+        
+        import random
+        base_greeting = random.choice(greetings)
+        
+        # Add some personality based on platform and age
+        if persona.get('platform_type') == 'discord':
+            if persona.get('age', 13) <= 14:
+                return f"{base_greeting} 😊 anyone wanna chat?"
+            else:
+                return f"{base_greeting} what's everyone up to?"
+        elif persona.get('platform_type') == 'snapchat':
+            return f"{base_greeting} 📸 bored rn"
+        elif persona.get('platform_type') == 'tiktok':
+            return f"{base_greeting} bestie! ✨ just saw the craziest video"
+        
+        return base_greeting
+    
+    def generate_response(self, message: str, persona: Dict[str, Any], session_id: str) -> Dict[str, Any]:
+        """
+        Generate response for WebSocket integration
+        Modified to match the expected signature
+        """
+        # Convert persona dict to expected format for the original method
+        conversation_history = []  # For now, we'll implement history later
+        
+        # Call the original generate_response method with correct parameters
+        return self.generate_response_original(persona, message, conversation_history)
+    
+    def generate_response_original(self, persona: Dict[str, Any], message: str, conversation_history: List[Dict]) -> Dict[str, Any]:
+        """
+        Original generate_response method renamed to avoid conflict
+        """
+        # Get persona details
+        personality_traits = persona.get('personality_traits', {})
+        language_style = persona.get('language_style', {})
+        age = persona.get('age', 13)
+        
+        # Analyze threat level
+        threat_level = self.analyze_threat_level(message)
+        
+        # Classify message type
+        message_type = self.classify_message_type(message)
+        
+        # Generate appropriate response based on threat level
+        if threat_level >= 2:
+            response = self.generate_defensive_response(persona, message, conversation_history)
+        elif threat_level == 1:
+            response = self.generate_cautious_response(persona, message, conversation_history)
+        else:
+            response = self.generate_normal_response(persona, message, message_type, conversation_history)
+        
+        # Apply persona-specific language styling
+        styled_response = self.apply_persona_styling(response, language_style, age)
+        
+        return {
+            'response': styled_response,
+            'threat_level': threat_level,
+            'message_type': message_type,
+            'confidence': 0.85  # Simulated confidence score
+        }
+

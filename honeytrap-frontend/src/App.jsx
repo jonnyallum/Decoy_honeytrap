@@ -5,6 +5,7 @@ import './App.css'
 // Import components
 import PlatformSelector from './components/PlatformSelector'
 import DiscordChat from './components/chat/DiscordChat'
+import DiscordChatWebSocket from './components/chat/DiscordChatWebSocket'
 import SnapchatChat from './components/chat/SnapchatChat'
 import TikTokChat from './components/chat/TikTokChat'
 import AdminDashboard from './components/admin/AdminDashboard'
@@ -28,6 +29,7 @@ function App() {
           {/* Public decoy chat routes */}
           <Route path="/" element={<PlatformSelector />} />
           <Route path="/discord" element={<DiscordChat />} />
+          <Route path="/discord-ws" element={<DiscordChatWebSocket />} />
           <Route path="/snapchat" element={<SnapchatChat />} />
           <Route path="/tiktok" element={<TikTokChat />} />
           
