@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #1a237e;
+        color: #e0e0e0;
+        font-family: 'Roboto', sans-serif;
+      }
+      .title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: bold;
+      }
+      .subtitle {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .accent {
+        color: #ff5722;
+      }
+      .method-box {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff5722;
+        transition: transform 0.3s ease;
+      }
+      .method-box:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <h1 class="title mb-8">Training Delivery Methods</h1>
+      
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div>
+          <div style="height: 350px;">
+            <canvas id="effectivenessChart"></canvas>
+          </div>
+          
+          <div class="mt-6 text-center">
+            <p class="text-lg"><span class="accent font-bold">Blended Learning Approach</span> maximizes knowledge retention and skill development</p>
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="space-y-4">
+          <div class="method-box p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <i class="fas fa-chalkboard-teacher text-2xl accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Classroom Instruction</p>
+                <p class="text-sm mt-1">Structured learning environment for theoretical content, case studies, and group discussions led by subject matter experts</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="method-box p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <i class="fas fa-laptop-code text-2xl accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Hands-on Laboratory Exercises</p>
+                <p class="text-sm mt-1">Practical experience with the AI Honeytrap Network in a controlled environment with guided exercises and simulations</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="method-box p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <i class="fas fa-desktop text-2xl accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Online Learning Modules</p>
+                <p class="text-sm mt-1">Self-paced instruction for foundational knowledge, legal updates, and procedural guidance through interactive content</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="method-box p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <i class="fas fa-users text-2xl accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Scenario-Based Simulations</p>
+                <p class="text-sm mt-1">Immersive, realistic training experiences that integrate technical, legal, and ethical aspects in complex scenarios</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="method-box p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <i class="fas fa-user-graduate text-2xl accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Mentoring and Supervised Practice</p>
+                <p class="text-sm mt-1">Guided transition from training to operational deployment under the guidance of experienced practitioners</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // Training Effectiveness Chart
+      const ctx = document.getElementById('effectivenessChart').getContext('2d');
+      const effectivenessChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Knowledge Retention', 'Skill Development', 'Confidence Building', 'Application Ability'],
+          datasets: [
+            {
+              label: 'Classroom Only',
+              data: [60, 40, 50, 35],
+              backgroundColor: 'rgba(224, 224, 224, 0.7)',
+              borderColor: 'rgba(224, 224, 224, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Blended Approach',
+              data: [85, 90, 80, 95],
+              backgroundColor: 'rgba(255, 87, 34, 0.7)',
+              borderColor: 'rgba(255, 87, 34, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              }
+            },
+            y: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              },
+              beginAtZero: true,
+              max: 100
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#e0e0e0',
+                font: {
+                  size: 14
+                }
+              }
+            },
+            title: {
+              display: true,
+              text: 'Training Effectiveness Comparison',
+              color: '#ffffff',
+              font: {
+                size: 16
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+

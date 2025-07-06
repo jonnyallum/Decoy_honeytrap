@@ -4,6 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import ProfileManagement from './ProfileManagement'
+import ContentManagement from './ContentManagement'
+import AnalyticsDashboard from './AnalyticsDashboard'
 import { 
   Shield, 
   Users, 
@@ -13,7 +16,10 @@ import {
   LogOut,
   Download,
   Eye,
-  Clock
+  Clock,
+  UserPlus,
+  Calendar,
+  BarChart3
 } from 'lucide-react'
 
 const AdminDashboard = () => {
@@ -162,6 +168,9 @@ const AdminDashboard = () => {
           <TabsList>
             <TabsTrigger value="recent">Recent High-Risk Sessions</TabsTrigger>
             <TabsTrigger value="sessions" onClick={fetchSessions}>All Sessions</TabsTrigger>
+            <TabsTrigger value="profiles">Profile Management</TabsTrigger>
+            <TabsTrigger value="content">Content Management</TabsTrigger>
+            <TabsTrigger value="analytics">Analytics Dashboard</TabsTrigger>
           </TabsList>
 
           <TabsContent value="recent" className="space-y-4">
@@ -266,6 +275,18 @@ const AdminDashboard = () => {
                 )}
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="profiles" className="space-y-4">
+            <ProfileManagement />
+          </TabsContent>
+
+          <TabsContent value="content" className="space-y-4">
+            <ContentManagement />
+          </TabsContent>
+
+          <TabsContent value="analytics" className="space-y-4">
+            <AnalyticsDashboard />
           </TabsContent>
         </Tabs>
       </div>

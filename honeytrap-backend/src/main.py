@@ -10,6 +10,11 @@ from src.models.chat import ChatSession, ChatMessage, Persona, Evidence, AuditLo
 from src.routes.user import user_bp
 from src.routes.chat import chat_bp
 from src.routes.admin import admin_bp
+from src.routes.profiles import profiles_bp
+from src.routes.content import content_bp
+from src.routes.profile_management import profile_management_bp
+from src.routes.content_automation import content_automation_bp
+from src.routes.discovery_analytics import discovery_analytics_bp
 import json
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
@@ -22,6 +27,11 @@ CORS(app, origins="*")
 app.register_blueprint(user_bp, url_prefix='/api')
 app.register_blueprint(chat_bp, url_prefix='/api')
 app.register_blueprint(admin_bp, url_prefix='/api')
+app.register_blueprint(profiles_bp, url_prefix='/api')
+app.register_blueprint(content_bp, url_prefix='/api')
+app.register_blueprint(profile_management_bp, url_prefix='/api')
+app.register_blueprint(content_automation_bp, url_prefix='/api')
+app.register_blueprint(discovery_analytics_bp, url_prefix='/api')
 
 # Database configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(os.path.dirname(__file__), 'database', 'app.db')}"

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #1a237e;
+        color: #e0e0e0;
+        font-family: 'Roboto', sans-serif;
+      }
+      .title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: bold;
+      }
+      .subtitle {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .accent {
+        color: #ff5722;
+      }
+      .module-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff5722;
+        transition: transform 0.3s ease;
+      }
+      .module-card:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <h1 class="title mb-8">Core Curriculum</h1>
+      
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div>
+          <div style="height: 300px;">
+            <canvas id="modulesChart"></canvas>
+          </div>
+          
+          <div class="mt-8">
+            <h2 class="subtitle mb-4">Learning Domains</h2>
+            <div class="flex justify-between">
+              <div class="flex flex-col items-center w-1/3">
+                <div class="w-16 h-16 rounded-full bg-opacity-20 bg-white flex items-center justify-center mb-2">
+                  <i class="fas fa-laptop-code text-3xl accent"></i>
+                </div>
+                <p class="text-center">Technical Competence</p>
+              </div>
+              <div class="flex flex-col items-center w-1/3">
+                <div class="w-16 h-16 rounded-full bg-opacity-20 bg-white flex items-center justify-center mb-2">
+                  <i class="fas fa-balance-scale text-3xl accent"></i>
+                </div>
+                <p class="text-center">Legal Knowledge</p>
+              </div>
+              <div class="flex flex-col items-center w-1/3">
+                <div class="w-16 h-16 rounded-full bg-opacity-20 bg-white flex items-center justify-center mb-2">
+                  <i class="fas fa-heart text-3xl accent"></i>
+                </div>
+                <p class="text-center">Ethical Judgment</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="space-y-4">
+          <div class="module-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <span class="text-xl font-bold accent">1</span>
+              </div>
+              <div>
+                <p class="font-bold text-white">Introduction to the AI Honeytrap Network</p>
+                <p class="text-sm mt-1">System overview, operational context, and investigative framework</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="module-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <span class="text-xl font-bold accent">2</span>
+              </div>
+              <div>
+                <p class="font-bold text-white">Legal Framework and Compliance</p>
+                <p class="text-sm mt-1">Relevant legislation, human rights, data protection, evidence law</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="module-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <span class="text-xl font-bold accent">3</span>
+              </div>
+              <div>
+                <p class="font-bold text-white">Ethical Considerations and Decision-Making</p>
+                <p class="text-sm mt-1">Ethical frameworks, professional ethics, bias recognition</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="module-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <span class="text-xl font-bold accent">4</span>
+              </div>
+              <div>
+                <p class="font-bold text-white">System Operation Fundamentals</p>
+                <p class="text-sm mt-1">User interface, access control, basic operations, security practices</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="module-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                <span class="text-xl font-bold accent">5</span>
+              </div>
+              <div>
+                <p class="font-bold text-white">Digital Evidence Handling</p>
+                <p class="text-sm mt-1">Evidence principles, collection procedures, chain of custody</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <p class="text-xl">All personnel must complete the <span class="accent font-bold">Core Curriculum</span> regardless of their specific role</p>
+      </div>
+    </div>
+    
+    <script>
+      // Modules Chart
+      const ctx = document.getElementById('modulesChart').getContext('2d');
+      const modulesChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['System Knowledge', 'Legal Framework', 'Ethical Awareness', 'Technical Skills', 'Evidence Handling'],
+          datasets: [{
+            label: 'Core Competencies',
+            data: [90, 85, 80, 75, 95],
+            backgroundColor: 'rgba(255, 87, 34, 0.2)',
+            borderColor: '#ff5722',
+            borderWidth: 2,
+            pointBackgroundColor: '#ff5722',
+            pointBorderColor: '#ffffff',
+            pointHoverBackgroundColor: '#ffffff',
+            pointHoverBorderColor: '#ff5722'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              grid: {
+                color: 'rgba(255, 255, 255, 0.2)'
+              },
+              pointLabels: {
+                color: '#e0e0e0',
+                font: {
+                  size: 14
+                }
+              },
+              ticks: {
+                backdropColor: 'transparent',
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: '#e0e0e0',
+                font: {
+                  size: 14
+                }
+              }
+            },
+            title: {
+              display: true,
+              text: 'Core Curriculum Competency Areas',
+              color: '#ffffff',
+              font: {
+                size: 16
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+

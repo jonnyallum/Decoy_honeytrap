@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #1a237e;
+        color: #e0e0e0;
+        font-family: 'Roboto', sans-serif;
+      }
+      .title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: bold;
+      }
+      .subtitle {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .accent {
+        color: #ff5722;
+      }
+      .role-card {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff5722;
+        transition: transform 0.3s ease;
+      }
+      .role-card:hover {
+        transform: translateX(5px);
+      }
+      .icon-circle {
+        background-color: rgba(255, 255, 255, 0.1);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <h1 class="title mb-8">Role-Specific Training Tracks</h1>
+      
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div>
+          <div style="height: 300px;">
+            <canvas id="roleTrainingChart"></canvas>
+          </div>
+          
+          <div class="mt-8">
+            <h2 class="subtitle mb-4">Specialized Modules Structure</h2>
+            <div class="role-card p-4 rounded mb-4">
+              <div class="flex items-center">
+                <div class="icon-circle mr-4">
+                  <i class="fas fa-puzzle-piece accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Module Structure</p>
+                  <p class="text-sm">Each role track contains 4 specialized modules</p>
+                </div>
+              </div>
+            </div>
+            <div class="role-card p-4 rounded">
+              <div class="flex items-center">
+                <div class="icon-circle mr-4">
+                  <i class="fas fa-graduation-cap accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Certification Levels</p>
+                  <p class="text-sm">Four levels of certification based on competency</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div class="space-y-4">
+          <div class="role-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="icon-circle mr-4 mt-1">
+                <i class="fas fa-server accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">System Administrator Track</p>
+                <p class="text-sm mt-1">System architecture, security management, operational support, and system maintenance</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="role-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="icon-circle mr-4 mt-1">
+                <i class="fas fa-user-shield accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Operational Personnel Track</p>
+                <p class="text-sm mt-1">Profile management, threat assessment, engagement techniques, and evidence collection</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="role-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="icon-circle mr-4 mt-1">
+                <i class="fas fa-users-cog accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Supervisory Staff Track</p>
+                <p class="text-sm mt-1">Authorization, risk management, oversight, and strategic coordination</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="role-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="icon-circle mr-4 mt-1">
+                <i class="fas fa-clipboard-check accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Oversight Personnel Track</p>
+                <p class="text-sm mt-1">Audit methodology, compliance assessment, assurance reporting, and improvement</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="role-card p-4 rounded">
+            <div class="flex items-start">
+              <div class="icon-circle mr-4 mt-1">
+                <i class="fas fa-balance-scale accent"></i>
+              </div>
+              <div>
+                <p class="font-bold text-white">Legal Advisor Track</p>
+                <p class="text-sm mt-1">Operational legal advice, digital evidence law, disclosure management, and case preparation</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <p class="text-xl"><span class="accent font-bold">Tailored Training</span> to Meet Specific Role Requirements</p>
+      </div>
+    </div>
+    
+    <script>
+      // Role Training Chart
+      const ctx = document.getElementById('roleTrainingChart').getContext('2d');
+      const roleTrainingChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['System Admin', 'Operational', 'Supervisory', 'Oversight', 'Legal Advisor'],
+          datasets: [{
+            label: 'Technical Focus',
+            data: [90, 70, 40, 30, 20],
+            backgroundColor: '#ff5722',
+          }, {
+            label: 'Legal Focus',
+            data: [30, 50, 60, 70, 90],
+            backgroundColor: '#ff8a65',
+          }, {
+            label: 'Operational Focus',
+            data: [50, 80, 70, 40, 60],
+            backgroundColor: '#ffccbc',
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              stacked: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              }
+            },
+            y: {
+              stacked: false,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              },
+              max: 100
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top',
+              labels: {
+                color: '#e0e0e0',
+                font: {
+                  size: 12
+                }
+              }
+            },
+            title: {
+              display: true,
+              text: 'Training Focus by Role',
+              color: '#ffffff',
+              font: {
+                size: 16
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+

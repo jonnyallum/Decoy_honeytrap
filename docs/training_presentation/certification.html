@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #1a237e;
+        color: #e0e0e0;
+        font-family: 'Roboto', sans-serif;
+      }
+      .title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: bold;
+      }
+      .subtitle {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .accent {
+        color: #ff5722;
+      }
+      .cert-level {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff5722;
+        transition: transform 0.3s ease;
+      }
+      .cert-level:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <h1 class="title mb-8">Assessment and Certification</h1>
+      
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div>
+          <h2 class="subtitle mb-4">Certification Levels</h2>
+          
+          <div class="space-y-4">
+            <div class="cert-level p-4 rounded">
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-award text-2xl accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Level 1 (Basic)</p>
+                  <p class="text-sm mt-1">Basic operations under supervision</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cert-level p-4 rounded">
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-award text-2xl accent"></i>
+                  <i class="fas fa-plus text-xs absolute accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Level 2 (Intermediate)</p>
+                  <p class="text-sm mt-1">Routine operations independently</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cert-level p-4 rounded">
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-award text-2xl accent"></i>
+                  <i class="fas fa-plus-circle text-xs absolute accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Level 3 (Advanced)</p>
+                  <p class="text-sm mt-1">Complex operations and guidance</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cert-level p-4 rounded">
+              <div class="flex items-center">
+                <div class="w-12 h-12 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-award text-2xl accent"></i>
+                  <i class="fas fa-star text-xs absolute accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Level 4 (Expert)</p>
+                  <p class="text-sm mt-1">Develop techniques and provide training</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6">
+            <h3 class="text-white text-lg font-semibold mb-2">Certification Validity</h3>
+            <p>Initial certification valid for <span class="accent font-bold">2 years</span>, with recertification required to maintain currency</p>
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div>
+          <h2 class="subtitle mb-4">Assessment Methodologies</h2>
+          
+          <div style="height: 300px;">
+            <canvas id="assessmentChart"></canvas>
+          </div>
+          
+          <div class="mt-8">
+            <h3 class="text-white text-lg font-semibold mb-2">Continuing Education</h3>
+            <ul class="list-disc ml-6 space-y-2">
+              <li>Quarterly legal and technical updates</li>
+              <li>Annual refresher training (16 hours)</li>
+              <li>Peer review and operational feedback</li>
+              <li>Specialized workshops for emerging threats</li>
+            </ul>
+          </div>
+          
+          <div class="mt-6">
+            <h3 class="text-white text-lg font-semibold mb-2">Professional Accreditation</h3>
+            <p>Program designed to meet standards for accreditation by:</p>
+            <ul class="list-disc ml-6 space-y-1">
+              <li>College of Policing (Digital Investigation)</li>
+              <li>National Police Chiefs' Council</li>
+              <li>Information Commissioner's Office</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <p class="text-xl"><span class="accent font-bold">Rigorous Assessment</span> Ensures Operational Readiness</p>
+      </div>
+    </div>
+    
+    <script>
+      // Assessment Methodologies Chart
+      const ctx = document.getElementById('assessmentChart').getContext('2d');
+      const assessmentChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Knowledge Tests', 'Practical Skills', 'Scenario-Based', 'Case Analysis', 'Operational Review'],
+          datasets: [{
+            label: 'Assessment Weight (%)',
+            data: [20, 30, 25, 15, 10],
+            backgroundColor: [
+              'rgba(255, 87, 34, 0.7)',
+              'rgba(255, 87, 34, 0.8)',
+              'rgba(255, 87, 34, 0.9)',
+              'rgba(255, 87, 34, 0.6)',
+              'rgba(255, 87, 34, 0.5)'
+            ],
+            borderColor: [
+              'rgba(255, 87, 34, 1)',
+              'rgba(255, 87, 34, 1)',
+              'rgba(255, 87, 34, 1)',
+              'rgba(255, 87, 34, 1)',
+              'rgba(255, 87, 34, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 35,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              },
+              title: {
+                display: true,
+                text: 'Weight (%)',
+                color: '#e0e0e0'
+              }
+            },
+            x: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: 'Assessment Methodology Distribution',
+              color: '#ffffff',
+              font: {
+                size: 16
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+

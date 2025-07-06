@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
+    <style>
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background: #1a237e;
+        color: #e0e0e0;
+        font-family: 'Roboto', sans-serif;
+      }
+      .title {
+        color: #ffffff;
+        font-size: 36px;
+        font-weight: bold;
+      }
+      .subtitle {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 500;
+      }
+      .accent {
+        color: #ff5722;
+      }
+      .timeline-item {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid #ff5722;
+      }
+      .milestone {
+        background-color: rgba(255, 87, 34, 0.2);
+        border: 2px solid #ff5722;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <h1 class="title mb-8">Implementation Timeline</h1>
+      
+      <div class="grid grid-cols-2 gap-8">
+        <!-- Left Column -->
+        <div>
+          <h2 class="subtitle mb-4">Phased Implementation</h2>
+          
+          <div class="space-y-4">
+            <div class="timeline-item p-4 rounded">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-flag-checkered accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Phase 1: Preparation (August 2025)</p>
+                  <p class="text-sm mt-1">Instructor training, materials finalization, facility setup</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline-item p-4 rounded">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-vial accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Phase 2: Pilot Program (September 2025)</p>
+                  <p class="text-sm mt-1">Initial delivery to select personnel, feedback collection</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline-item p-4 rounded">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-rocket accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Phase 3: Full Deployment (October 2025)</p>
+                  <p class="text-sm mt-1">Regular training schedule begins, all roles covered</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="timeline-item p-4 rounded">
+              <div class="flex items-start">
+                <div class="w-10 h-10 rounded-full bg-opacity-20 bg-white flex items-center justify-center mr-4">
+                  <i class="fas fa-sync-alt accent"></i>
+                </div>
+                <div>
+                  <p class="font-bold text-white">Phase 4: Continuous Improvement (Ongoing)</p>
+                  <p class="text-sm mt-1">Regular updates, refresher courses, advanced modules</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Right Column -->
+        <div>
+          <h2 class="subtitle mb-4">Implementation Milestones</h2>
+          <div style="height: 350px;">
+            <canvas id="timelineChart"></canvas>
+          </div>
+          
+          <div class="mt-8">
+            <h2 class="subtitle mb-4">Key Success Metrics</h2>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="milestone p-3 rounded-lg text-center">
+                <i class="fas fa-user-graduate text-2xl mb-2 accent"></i>
+                <p class="font-bold">100%</p>
+                <p class="text-sm">Personnel Certified</p>
+              </div>
+              <div class="milestone p-3 rounded-lg text-center">
+                <i class="fas fa-thumbs-up text-2xl mb-2 accent"></i>
+                <p class="font-bold">90%+</p>
+                <p class="text-sm">Satisfaction Rate</p>
+              </div>
+              <div class="milestone p-3 rounded-lg text-center">
+                <i class="fas fa-shield-alt text-2xl mb-2 accent"></i>
+                <p class="font-bold">Zero</p>
+                <p class="text-sm">Compliance Issues</p>
+              </div>
+              <div class="milestone p-3 rounded-lg text-center">
+                <i class="fas fa-chart-line text-2xl mb-2 accent"></i>
+                <p class="font-bold">30%</p>
+                <p class="text-sm">Efficiency Increase</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center">
+        <p class="text-xl">Full operational capability expected by <span class="accent font-bold">December 2025</span></p>
+      </div>
+    </div>
+    
+    <script>
+      // Timeline Chart
+      const ctx = document.getElementById('timelineChart').getContext('2d');
+      const timelineChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Preparation', 'Pilot Program', 'Full Deployment', 'First Review', 'Second Review', 'Full Evaluation'],
+          datasets: [{
+            label: 'Timeline (Weeks)',
+            data: [4, 4, 8, 4, 4, 4],
+            backgroundColor: [
+              'rgba(255, 87, 34, 0.7)',
+              'rgba(255, 87, 34, 0.7)',
+              'rgba(255, 87, 34, 0.7)',
+              'rgba(255, 87, 34, 0.7)',
+              'rgba(255, 87, 34, 0.7)',
+              'rgba(255, 87, 34, 0.7)'
+            ],
+            borderColor: [
+              '#ff5722',
+              '#ff5722',
+              '#ff5722',
+              '#ff5722',
+              '#ff5722',
+              '#ff5722'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              },
+              title: {
+                display: true,
+                text: 'Duration (Weeks)',
+                color: '#ffffff'
+              }
+            },
+            y: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                color: '#e0e0e0'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: 'Implementation Schedule (August 2025 - March 2026)',
+              color: '#ffffff',
+              font: {
+                size: 16
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+
