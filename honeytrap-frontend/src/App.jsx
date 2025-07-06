@@ -6,6 +6,8 @@ import './App.css'
 import PlatformSelector from './components/PlatformSelector'
 import DiscordChat from './components/chat/DiscordChat'
 import DiscordChatWebSocket from './components/chat/DiscordChatWebSocket'
+import FacebookChat from './components/chat/FacebookChat'
+import InstagramChat from './components/chat/InstagramChat'
 import SnapchatChat from './components/chat/SnapchatChat'
 import TikTokChat from './components/chat/TikTokChat'
 import AdminDashboard from './components/admin/AdminDashboard'
@@ -30,6 +32,8 @@ function App() {
           <Route path="/" element={<PlatformSelector />} />
           <Route path="/discord" element={<DiscordChat />} />
           <Route path="/discord-ws" element={<DiscordChatWebSocket />} />
+          <Route path="/facebook" element={<FacebookChat />} />
+          <Route path="/instagram" element={<InstagramChat />} />
           <Route path="/snapchat" element={<SnapchatChat />} />
           <Route path="/tiktok" element={<TikTokChat />} />
           

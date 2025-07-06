@@ -18,6 +18,22 @@ const PlatformSelector = () => {
       textColor: 'text-indigo-600'
     },
     {
+      id: 'facebook',
+      name: 'Facebook',
+      description: 'Connect with friends and family',
+      icon: MessageCircle,
+      color: 'bg-blue-600 hover:bg-blue-700',
+      textColor: 'text-blue-600'
+    },
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      description: 'Share photos and direct messages',
+      icon: Camera,
+      color: 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600',
+      textColor: 'text-purple-600'
+    },
+    {
       id: 'snapchat',
       name: 'Snapchat',
       description: 'Share moments with friends',
